@@ -20,10 +20,14 @@ export default function App() {
     let bgColor = event.target.value.toLowerCase();
     var shadey = colorPalette.find((obj) => obj.name === event.target.value);
     var shadeList = shadey.shades;
-    shadey ? setShade(shadeList) : [];
-    if (bgColor == "green") {
+    if (shadey) {
+        setShade(shadeList);
+    } else {
+        setShade([]);
+    }
+    if (bgColor === "green") {
       setBG(greenStyle);
-    } else if (bgColor == "red") {
+    } else if (bgColor === "red") {
       setBG(redStyle);
     } else {
       setBG(blueStyle);
@@ -42,9 +46,9 @@ export default function App() {
       </select>
       <label htmlFor="shades">Choose a shade:</label>
       <select name="shades" id="shades">
-        {selShade != [] &&
+        {selShade.length !== 0 &&
           selShade.map((shade) => (
-            <option key={selShade.findIndex((sh) => sh == shade)} value={shade}>
+            <option key={selShade.findIndex((sh) => sh === shade)} value={shade}>
               {shade}
             </option>
           ))}
